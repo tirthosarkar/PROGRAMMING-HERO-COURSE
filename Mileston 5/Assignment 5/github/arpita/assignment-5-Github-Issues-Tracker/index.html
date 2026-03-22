@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Issues Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white w-[420px] p-8 rounded-xl shadow-md">
+
+<div class="text-center">
+
+<div class="bg-white-900 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+<!-- <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-8"> -->
+ <img src="./assets/github-logo.png" alt="">
+</div>
+
+<h1 class="text-xl font-semibold">
+GitHub Issues Tracker
+</h1>
+
+<p class="text-gray-500 text-sm mb-6">
+Sign in to manage your issues
+</p>
+
+</div>
+
+<label class=" text-black-800">Username</label>
+
+<input id="username"
+class="border w-full p-2 rounded mt-1 mb-2"
+placeholder="Enter Username">
+
+<p class="text-xs text-blue-600 mb-4">
+Default: admin
+</p>
+
+<label class="text-black-800">Password</label>
+
+<input id="password"
+type="password"
+class="border w-full p-2 rounded mt-1 mb-2"
+placeholder="Enter Password">
+
+<p class="text-xs text-blue-600 mb-4">
+Default: admin123
+</p>
+
+<button onclick="login()"
+class="w-full bg-blue-600 text-white py-2 rounded">
+Sign In
+</button>
+
+<div class="flex items-center gap-2 my-4">
+<hr class="flex-1">
+<span class="text-gray-400 text-sm">OR</span>
+<hr class="flex-1">
+</div>
+
+<div class="bg-gray-100 p-3 rounded text-sm text-center">
+
+<p class="text-gray-500 font-medium">Demo Credentials:</p>
+
+<p class="pt-4 text-black-800 font-regular" >Username: <span class="text-gray-500">admin</span></p>
+<p class="text-black-800 font-regular">Password: <span class="text-gray-500">admin123</span></p>
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+let u=document.getElementById("username").value
+let p=document.getElementById("password").value
+
+if(u==="admin" && p==="admin123"){
+
+localStorage.setItem("login","true")
+window.location="dashboard.html"
+
+}else{
+
+alert("Invalid login")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

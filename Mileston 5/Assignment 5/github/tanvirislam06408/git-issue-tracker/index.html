@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | git-tracker</title>
+    <!-- daisy ui and tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
+    <!-- styles -->
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC]">
+    <header></header>
+    <main>
+        <!-- login -->
+        <section class=" flex flex-col items-center justify-center h-screen box-border ">
+            <div class="max-w-[540px] w-full mx-auto shadow-xl bg-white rounded-lg  pb-7">
+                <div class="flex flex-col items-center justify-center text-center mb-8 pt-10">
+                    <img class="mb-6" src="./assets/github-logo.png" alt="">
+                    <h1 class="font-bold mb-2 text-2xl">GitHub Issues Tracker</h1>
+                    <p class="text-sm text-gray-500">Sign in to manage your issues</p>
+                </div>
+                <!-- inputs -->
+                <div class="max-w-[490px] mx-auto px-5">
+                    <from class="">
+                        <div class="space-y-1 mb-3">
+                            <legend class="fieldset-legend font-medium text-sm">Username</legend>
+                            <input value="admin" id="Username" type="text" class="input w-full rounded-lg" placeholder="Enter Username" />
+                            <p class="label text-[#4A00FF] font-semibold">Default: admin</p>
+                        </div>
+                        <div class="space-y-1 mb-3">
+                            <legend class="fieldset-legend font-medium text-sm">Password</legend>
+                            <input value="admin123" id="Password" type="text" class="input rounded-lg w-full" placeholder="Enter Password" />
+                            <p class="label text-[#4A00FF] font-semibold">Default: admin123</p>
+                        </div>
+                        <br>
+                        <button id="btnSignIn" class="btn btn-primary w-full rounded-lg">Sign In</button>
+                    </from>
+                    <div class="divider">OR</div>
+                    <div class="text-center space-y-2">
+                        <h3>Demo Credentials:</h3>
+                        <div class="bg-gray-100 p-3 space-y-2 rounded-lg">
+                            <h3 class="font-bold text-lg">Username: <span class="font-normal text-gray-500">admin</span>
+                            </h3>
+                            <h3 class="font-bold text-lg">Password: <span
+                                    class="font-normal text-gray-500">admin123</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </section>
+    </main>
+    <footer></footer>
+
+
+    <script src="./scripts/main.js"></script>
+</body>
+
+</html>

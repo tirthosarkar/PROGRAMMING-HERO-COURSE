@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Issues</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+
+<nav class="bg-white shadow-sm border-b">
+
+<div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+
+<div class="flex items-center gap-2 font-semibold">
+
+<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="w-6">
+GitHub Issues Tracker
+
+</div>
+
+<div class="flex gap-2">
+
+<input id="searchInput"
+placeholder="Search issues..."
+class="border rounded px-3 py-1">
+
+<button class="bg-purple-600 text-white px-4 rounded">
++ New Issue
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- Tabs Section -->
+
+<div class="max-w-7xl mx-auto mt-6">
+
+<div class="bg-white p-6 rounded-lg shadow">
+
+<!-- Tabs -->
+
+<div class="flex gap-3 mb-4">
+
+<button onclick="loadIssues('all')" id="allBtn"
+class="tab bg-purple-600 text-white px-4 py-1 rounded">
+All
+</button>
+
+<button onclick="loadIssues('open')" id="openBtn"
+class="tab border px-4 py-1 rounded">
+Open
+</button>
+
+<button onclick="loadIssues('closed')" id="closedBtn"
+class="tab border px-4 py-1 rounded">
+Closed
+</button>
+
+</div>
+
+<!-- Issue Count -->
+
+<div class="flex justify-between items-center mb-6 bg-white-900 p-4 rounded-lg shadow-sm border border-gray-100">
+
+   <div class="flex justify-center items-center gap-2">
+     <div class="w-10 h-8 flex items-center">
+    <img src="./assets/Group 1.png" alt="">
+</div>
+<div>
+
+<h2 class="font-semibold text-lg">
+50 Issues
+</h2>
+<p class="text-gray-500 text-sm">
+Track and manage your project issues
+</p>
+   </div>
+
+
+
+</div>
+
+<div class="flex gap-4 text-sm">
+
+<p class="text-green-600">● <span class="text-black">Open</span></p>
+<p class="text-purple-600">● <span  class="text-black">Closed</span></p>
+
+</div>
+
+</div>
+
+<!-- Issue Cards -->
+
+<div id="issuesContainer"
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

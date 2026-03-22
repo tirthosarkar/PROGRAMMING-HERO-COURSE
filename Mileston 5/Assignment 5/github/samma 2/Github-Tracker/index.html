@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issue Tracker</title>
+
+    <!-- DaisyUi + Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google-Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Fav Icon -->
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+<!-- All Styles here -->
+    <style>
+        * {
+            font-family: "Inter", sans-serif;
+        }
+
+        #dashboard {
+            display: none;
+        }
+
+        .card-open {
+            border-top: 3px solid #22c55e !important;
+        }
+
+        .card-closed {
+            border-top: 3px solid #a855f7 !important;
+        }
+
+        .issue-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .issue-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+        }
+
+        #issue-modal:not(.hidden) {
+            display: flex;
+        }
+
+        .tab-active {
+            background-color: #4f46e5 !important;
+            color: white !important;
+            border-color: #4f46e5 !important;
+        }
+
+        @media (max-width: 1100px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- LOGIN PAGE -->
+    <div id="login-page" class="min-h-screen flex items-center justify-center">
+
+        <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-md border border-gray-200">
+
+            <!-- Logo + Title + Subtitle -->
+            <div class="flex flex-col items-center mb-5">
+                <img src="./assets/github-logo.png" alt="github logo" class="mb-3" style="width:56px; height:56px;">
+                <h1 class="text-2xl font-bold text-black mt-2">GitHub Issues Tracker</h1>
+                <p class="text-md text-gray-500 mt-1">Sign in to manage your issues</p>
+            </div>
+
+            <!-- Error message -->
+            <div id="login-error"
+                class="hidden text-center rounded-lg mb-4 py-2 text-sm bg-red-50 border border-red-200 text-red-600">
+                Wrong username or password!
+            </div>
+
+            <!-- Username -->
+            <div class="mb-4">
+                <label class="block font-semibold text-black mb-1">Username</label>
+                <input id="username-input" type="text" placeholder="Enter Username"
+                    class="input input-bordered w-full text-sm">
+                <p class="text-sm mt-1 text-indigo-500">Default: admin</p>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-5">
+                <label class="block text-md font-semibold text-black mb-1">Password</label>
+                <input id="password-input" type="password" placeholder="Enter Password"
+                    class="input input-bordered w-full text-sm">
+                <p class="text-sm mt-1 text-indigo-500">Default: admin123</p>
+            </div>
+
+            <!-- Sign In button -->
+            <button onclick="handleLogin()" class="btn rounded-xl btn-primary w-full text-lg">
+                Sign In
+            </button>
+
+            <!-- OR divider -->
+            <div class="flex items-center gap-3 my-5">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-md text-gray-400">OR</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <!-- Demo credentials -->
+            <div class="text-center rounded-lg py-3 px-4 bg-gray-50 border border-gray-200 text-md text-gray-700">
+                <p class="text-gray-400 mb-1">Demo Credentials:</p>
+                <p><strong>Username:</strong> admin</p>
+                <p><strong>Password:</strong> admin123</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="min-h-screen bg-gray-100">
+
+        <!-- NAVBAR -->
+        <nav class="bg-white border-b border-gray-200 sticky top-0 z-10">
+            <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+
+                <!-- Left: Logo + Name -->
+                <div class="flex items-center gap-2">
+                    <img src="./assets/github-logo.png" alt="github logo" style="width:28px; height:28px;">
+                    <span class="font-bold text-black text-lg">GitHub Issues Tracker</span>
+                </div>
+
+                <!-- Right: Search + Button -->
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
+                        <span class="pl-3 text-gray-400 text-md"><i class="fa fa-search"></i></span>
+                        <input id="search-input" type="text" placeholder="Search issues..."
+                            class="outline-none bg-transparent px-2 py-2 text-sm w-48">
+                    </div>
+                    <button class="btn btn-primary btn-md">+ New Issue</button>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <div class="max-w-6xl mx-auto px-5 py-6">
+
+            <!-- TABS -->
+            <div class="flex gap-1 mb-4">
+                <button id="tab-all" onclick="changeTab('all')"
+                    class="tab-active rounded-lg font-semibold text-md px-5 py-2 border cursor-pointer">
+                    All
+                </button>
+                <button id="tab-open" onclick="changeTab('open')"
+                    class="rounded-lg font-semibold text-md px-5 py-2 border border-gray-400 bg-transparent text-gray-600 cursor-pointer">
+                    Open
+                </button>
+                <button id="tab-closed" onclick="changeTab('closed')"
+                    class="rounded-lg font-semibold text-md px-5 py-2 border border-gray-400 bg-transparent text-gray-600 cursor-pointer">
+                    Closed
+                </button>
+            </div>
+
+            <!-- ISSUES COUNT BAR -->
+            <div class="bg-white border border-gray-400 rounded-t-xl px-5 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center text-lg"><img
+                            src="./assets/Aperture.png" alt=""></div>
+                    <div>
+                        <p id="issues-count-text" class="font-bold text-gray-900 text-md">0 Issues</p>
+                        <p class="text-sm text-gray-600">Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 text-md font-semibold">
+                    <span class="text-green-600">
+                        <i class="fa-solid fa-circle text-sm"></i>
+                        Open <span id="open-count">0</span>
+                    </span>
+                    <span class="text-purple-600">
+                        <i class="fa-solid fa-circle text-sm"></i>
+                        Closed <span id="closed-count">0</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- CARDS AREA -->
+            <div class="bg-white border border-gray-400 border-t-0 rounded-b-xl p-4 relative min-h-64">
+
+               <div id="loading-spinner" style="display:none;"
+    class="absolute inset-0 z-10 flex items-center justify-center bg-white/80 rounded-b-xl">
+    <div style="width:40px; height:40px; border:3px solid #e5e7eb; border-top-color:#4f46e5; border-radius:50%; animation:spin 0.7s linear infinite;"></div>
+    <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+</div>
+
+                <!-- 4 column grid -->
+                <div id="cards-grid" class="cards-grid"
+                    style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px;">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL -->
+    <div id="issue-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60">
+
+        <div class="bg-white rounded-2xl w-full max-w-lg max-h-screen overflow-y-auto shadow-2xl">
+
+            <!-- Title + Close -->
+            <div class="flex items-start justify-between p-6 pb-0">
+                <h2 id="modal-title" class="font-bold text-gray-900 text-lg flex-1 pr-4 leading-snug">
+                    Loading...
+                </h2>
+                           </div>
+
+            <!-- Status + Opened by -->
+            <div class="flex items-center gap-2 flex-wrap px-6 pt-3">
+                <span id="modal-status" class="text-sm font-bold px-3 py-1 rounded-full border">
+                    ● Open
+                </span>
+                <span id="modal-opened-info" class="text-md text-gray-600 font-medium"></span>
+            </div>
+
+            <!-- Labels -->
+            <div id="modal-labels" class="flex gap-2 flex-wrap px-6 pt-2"></div>
+
+            <!-- Description -->
+            <div id="modal-desc"
+                class="mx-6 mt-3 bg-gray-100 border border-gray-100 rounded-lg px-4 py-3 text-sm text-gray-600 ">
+            </div>
+
+            <!-- Assignee + Priority -->
+            <div class="grid grid-cols-2 gap-4 px-6 pt-4 border border-gray-50 bg-gray-100 rounded-lg mt-3 mx-6">
+                <div>
+                    <p class="text-xs text-gray-400 uppercase font-semibold tracking-wide mb-1">Assignee:</p>
+                    <p id="modal-assignee" class="text-sm font-semibold text-gray-800">—</p>
+                </div>
+                <div class="mb-2">
+                    <p class="text-sm text-gray-600 font-semibold mb-1">Priority:</p>
+                    <span id="modal-priority-high"
+                        class="hidden text-sm font-bold px-3 py-1 rounded-full bg-red-100 text-red-600">HIGH</span>
+                    <span id="modal-priority-medium"
+                        class="hidden text-sm font-bold px-3 py-1 rounded-full bg-yellow-100 text-yellow-600">MEDIUM</span>
+                    <span id="modal-priority-low"
+                        class="hidden text-sm font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-600">LOW</span>
+                </div>
+            </div>
+
+            <!-- Close button -->
+            <div class="flex justify-end p-6">
+                <button onclick="closeModal()" class="btn btn-primary">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

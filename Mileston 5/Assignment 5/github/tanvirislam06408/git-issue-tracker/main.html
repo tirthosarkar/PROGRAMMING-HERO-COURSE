@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | git-tracker</title>
+    <!-- daisy ui and tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+
+    <!-- font awesome cdn -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- styles -->
+    <style>
+        * {
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC]">
+    <header class="bg-base-100">
+        <nav class="navbar md:w-10/12 mx-auto">
+            <div class="flex-1 flex items-center gap-3">
+                <div class="h-9 w-9 mr-4 md:mr-0">
+                    <img src="./assets/github-logo.png" alt="">
+                </div>
+                <h1 class="font-semibold text-2xl hidden md:block">GitHub Issues Tracker</h1>
+            </div>
+            <div class="flex gap-2">
+                <input id="searchValue" type="text" placeholder="Search issues..." class="input input-bordered w-32 md:w-auto" />
+                <div class="dropdown dropdown-end">
+                    <button id="searchBtn" class="btn btn-primary font-semibold">Search</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container mx-auto min-h-screen">
+        <section>
+            <!-- navigation btn -->
+            <div class="shadow-xl mt-5 md:mt-20 bg-white px-1 py-3 md:p-6 rounded-xl space-x-4">
+                <button id="btn-all" class="btn btn-primary">All</button>
+                <button id="btn-open" class="btn text-gray-500">Open</button>
+                <button id="btn-closed" class="btn text-gray-500">Closed</button>
+            </div>
+
+        </section>
+        <!-- dynamic cards data -->
+        <section>
+            <!-- text content -->
+            <div class="flex justify-between items-center  flex-wrap space-y-2 shadow-xl bg-white mt-4 p-1 md:p-5 rounded-lg">
+                <div class="flex items-center gap-4">
+                    <div>
+                        <img src="./assets/Aperture.png" alt="">
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl"><span id="cardsCount"></span> Issues</h3>
+                        <p class="text-gray-500 text-[16px] font-normal">Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="bg-[#00A96E] rounded-full w-4 h-4">
+                        </div>
+                        <h1>Open</h1>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="bg-[#A855F7] rounded-full w-4 h-4">
+                        </div>
+                        <h1>Closed</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- issue cards -->
+            <div id="issueCards" class="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-4 mt-5 shadow-lg p-6 gap-5">
+
+               
+            </div>
+            <!-- loading -->
+             <div class="flex  justify-center items-center py-20">
+        <span id="spnner" class="loading hidden loading-spinner loading-xl"></span>
+    </div>
+            <!-- modal -->
+
+            <!-- Open the modal using ID.showModal() method -->
+<!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  
+</dialog>
+        </section>
+    </main>
+
+
+
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
