@@ -26,15 +26,15 @@ Tick the checkbox when you finish each day's work.
 - [x] Complete Day 11 — 11 March 2026
 - [x] Complete Day 12 — 12 March 2026
 - [x] Complete Day 13 — 13 March 2026
-- [ ] Complete Day 14 — 14 March 2026
-- [ ] Complete Day 15 — 15 March 2026
-- [ ] Complete Day 16 — 16 March 2026
-- [ ] Complete Day 17 — 17 March 2026
-- [ ] Complete Day 18 — 18 March 2026
-- [ ] Complete Day 19 — 19 March 2026
-- [ ] Complete Day 20 — 20 March 2026
-- [ ] Complete Day 21 — 21 March 2026
-- [ ] Complete Day 22 — 22 March 2026
+- [x] Complete Day 14 — 14 March 2026
+- [x] Complete Day 15 — 15 March 2026
+- [x] Complete Day 16 — 16 March 2026
+- [x] Complete Day 17 — 17 March 2026
+- [x] Complete Day 18 — 18 March 2026
+- [x] Complete Day 19 — 19 March 2026
+- [x] Complete Day 20 — 20 March 2026
+- [x] Complete Day 21 — 21 March 2026
+- [x] Complete Day 22 — 22 March 2026
 - [ ] Complete Day 23 — 23 March 2026
 - [ ] Complete Day 24 — 24 March 2026
 - [ ] Complete Day 25 — 25 March 2026
